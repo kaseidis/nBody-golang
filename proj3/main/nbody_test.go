@@ -252,7 +252,7 @@ func TestBenchmark(t *testing.T) {
 	// Genreate the task
 	task := testDataGenerator(-3, 3, -1.5, 1.5, planetCount)
 
-	ctx, cancel := context.WithTimeout(context.Background(), 1*time.Minute)
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Minute)
 	defer cancel()
 	cmd := exec.CommandContext(ctx, "go", "run", "proj3/main", numOfThreads)
 
