@@ -1,0 +1,4 @@
+*.result.json
+*.exe
+.DS_Store
+*.txt
