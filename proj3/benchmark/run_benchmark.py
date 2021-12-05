@@ -92,8 +92,8 @@ for planetCount in planetCount_list:
         result[planetCount][threads] = run_test(planetCount, threads)
         result[planetCount][threads] = seq_result[planetCount] / result[planetCount][threads]
         # Print Status
-        print("[Parallel] ", planetCount, "thread_count=" +
-              threads, "speedup", result[planetCount][threads])
+        print("[Parallel]", planetCount, "planets thread_count=" +
+              str(threads), "speedup", result[planetCount][threads])
         sys.stdout.flush()
     plt.plot(*zip(*sorted(result[planetCount].items())), label="Planet Count="+str(planetCount))
 # Save graph
