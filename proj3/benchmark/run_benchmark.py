@@ -13,7 +13,6 @@
 # SBATCH --cpus-per-task=16
 # SBATCH --mem-per-cpu=300
 
-from posix import environ
 import matplotlib
 import matplotlib.pyplot as plt
 import subprocess
@@ -22,7 +21,9 @@ import os
 
 
 # Load module for test
-subprocess.call("module load golang/1.16.2", shell=True)
+print("[Main] Running on",os.name)
+if os.name != 'nt':
+    subprocess.call("module load golang/1.16.2", shell=True, stdout=subprocess.PIPE)
 
 # Global set up for test script
 matplotlib.use('Agg')
@@ -72,6 +73,8 @@ for planetCount in planetCount_list:
     print("[Seq]", planetCount, "planets took", seq_result[planetCount], 
           "seconds to finish")
     sys.stdout.flush()
+    # Delete Unwanted file
+    os.remove(relativePath+filePath)
 
 # Run parallel tests and create graph
 print("[Main] Run Parallel Tests")

@@ -298,7 +298,7 @@ func TestBenchmark(t *testing.T) {
 			if err != nil {
 				t.Fatal("<TestBenchmark> Failed to save file")
 			} else {
-				fmt.Fprintln(file, duration)
+				fmt.Fprintf(file, "%f", duration)
 				file.Close()
 			}
 		}
