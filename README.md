@@ -159,3 +159,7 @@ There is a program help us visulize the result in ``./proj3/samples/result_visul
 
 - Produce speedup graph(s) for those data sets.
     - See "Test result" section.
+
+# Advance Feature
+
+Parallel version of n-body simulator is implementated under ``BSP`` parallel model. The implemetation detail are explained in "File" section.
