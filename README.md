@@ -129,14 +129,33 @@ There is a program help us visulize the result in ``./proj3/samples/result_visul
 
 - Describe the challenges you faced while implementing the system. What aspects of the system might make it difficult to parallelize? In other words, what to you hope to learn by doing this assignment?
     - Since there are two complete diffrent steps we need iterate through all planets with diffrent logic. We need two different super-step implement in BSP.
-    -In my program I used two diffrent counter to blocking two different super step.
+    - In my program I used two diffrent counter in order to block two different super step.
 
 - Specifications of the testing machine you ran your experiments on (i.e. Core Architecture (Intel/AMD), Number of cores, operating system, memory amount, etc.)
     - See "Test result" section.
 
 - What are the hotspots and bottlenecks in your sequential program? Were you able to parallelize the hotspots and/or remove the bottlenecks in the parallel version?
+    - There are two hotspots in n-body simulation. One is caclualting the forces, and one is updating the location. The bottle neck of program is the json encode part.
+    - All hotspot has been parallized, but the bottleneck is still exist in parallelized implementations.
 
 - What limited your speedup? Is it a lack of parallelism? (dependencies) Communication or synchronization overhead? As you try and answer these questions, we strongly prefer that you provide data and measurements to support your conclusions.
+    - Communication overhead are the major limitation of speedup. I measured the total time take calling ``bspBlocking()`` for last blocked threads, and time calling codes. When the threads number incerase, the ``bspBlocking()`` took longer to run. For other part of program it shortened time linearly by thread number.
+    - Blocking timing code can find in ``TimingMod.md``
+    - We can see timing result below.
+        ```
+        user@ubuntu main % go run proj3/main 2 < ../samples/test3.json 1> /dev/null
+        Blocking: 1.679419
+        Non-Blocking: 31.302164
+        user@ubuntu main % go run proj3/main 4 < ../samples/test3.json 1> /dev/null
+        Blocking: 1.701379
+        Non-Blocking: 17.439106
+        user@ubuntu main % go run proj3/main 6 < ../samples/test3.json 1> /dev/null
+        Blocking: 1.709008
+        Non-Blocking: 11.791596
+        user@ubuntu main % go run proj3/main 8 < ../samples/test3.json 1> /dev/null
+        Blocking: 1.765167
+        Non-Blocking: 9.223639
+        ```
 
 - Produce speedup graph(s) for those data sets.
     - See "Test result" section.
