@@ -163,3 +163,7 @@ There is a program help us visulize the result in ``./proj3/samples/result_visul
 # Advance Feature
 
 Parallel version of n-body simulator is implementated under ``BSP`` parallel model. The implemetation detail are explained in "File" section.
+
+# Reference
+
+Princeton University. (n.d.). N-body simulations. Princeton University. Retrieved December 1, 2021, from https://physics.princeton.edu/~fpretori/Nbody/intro.htm. 
