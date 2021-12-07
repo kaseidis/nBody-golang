@@ -95,8 +95,8 @@ func initBSPContext(input *json.Decoder, output *json.Encoder, numOfThreads int)
 
 // ============== nbody BSP Implementation ==============
 
-// Aggregate results
-func aggregate(ctx *bspContext) {
+// Output results and update shared status
+func updateContext(ctx *bspContext) {
 	// Construct result
 	var result data.Result
 	result.Planets = ctx.currentTask.Planets
@@ -164,7 +164,7 @@ func executeBSP(tid int, ctx *bspContext) {
 			// Blocking
 			bspBlocking(tid, ctx.numOfThreads, ctx.cond,
 				&ctx.lockedThreadP2, func() {
-					aggregate(ctx)
+					updateContext(ctx)
 				})
 		}
 	}
